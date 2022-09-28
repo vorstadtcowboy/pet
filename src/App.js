@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import Title from './components/Title';
+import Animal from './components/Animal';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="wrapper">
+      {/** Komponente extrahieren Name Title  */}
+      <Title content="Hunde & Katzen" />
+
+      {/**Animal */}
+      <Animal />
+      {/** Animal Komponente Endet hier */}
+      <div className="controls">
+        <button id="pre" disabled>
+          zurück
+        </button>
+        <button id="next">vor</button>
+      </div>
     </div>
   );
-}
+};
 
 export default App;
