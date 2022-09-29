@@ -2,15 +2,21 @@ import Title from './components/Title';
 import Animal from './components/Animal';
 import animalData from './animalData';
 //Import des React Hooks useState
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const App = () => {
   //console.log(animalData[0]);
 
-  //Use State benutzen
+  //Use State benutzen (wenn sich eine Wert ändert)
   const [counter, setCounter] = useState(0);
   const [disabledNext, setDisabledNext] = useState(false);
   const [disabledBack, setDisabledBack] = useState(true);
+
+  //UseEffect benutzen (bei Side Effects wie title ändern und fetchen)
+  useEffect(() => {
+    //title ändern
+    document.title = `Hilf ${animalData[counter].species} ${animalData[counter].name}`; //Hilf <tierart> <tiername>
+  });
 
   //EventHandler-function
   function handleNext() {
@@ -32,22 +38,42 @@ const App = () => {
     }
   };
 
-  return (
-    <div className="wrapper">
-      {/** Komponente extrahieren Name Title  */}
-      <Title content="Hunde & Katzen" />
+  const alleTiere = animalData.map((tier) => <Animal tier={tier} />);
 
-      {/**Animal */}
-      <Animal tier={animalData[counter]} />
-      {/** Animal Komponente Endet hier */}
-      <div className="controls">
-        <button id="pre" onClick={handleBack} disabled={disabledBack}>
-          zurück {counter}
-        </button>
-        <button id="next" onClick={handleNext} disabled={disabledNext}>
-          vor {counter}
-        </button>
+  //Alle Katzen
+  const alleKatzen = animalData
+    .filter((tier) => tier.species === 'Katze')
+    .map((katze) => <Animal tier={katze} />);
+
+  return (
+    <div>
+      <div className="wrapper">
+        {/** Komponente extrahieren Name Title  */}
+        <Title content="Hunde & Katzen" />
+        {/** Conditional Rendering */}
+
+        {/**Animal */}
+        <Animal tier={animalData[counter]} />
+        {/** Animal Komponente Endet hier */}
+        <div className="controls">
+          <button id="pre" onClick={handleBack} disabled={disabledBack}>
+            zurück {counter}
+          </button>
+          <button id="next" onClick={handleNext} disabled={disabledNext}>
+            vor {counter}
+          </button>
+        </div>
       </div>
+      {/** Hier eine Sektion mit allen Tieren */}
+      <section>
+        <h2>Alle Tiere</h2>
+        <div className="row">{alleTiere}</div>
+      </section>
+
+      <section>
+        <h2>Alle Katzen</h2>
+        <div className="row">{alleKatzen}</div>
+      </section>
     </div>
   );
 };

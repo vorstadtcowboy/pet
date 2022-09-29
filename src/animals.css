@@ -176,3 +176,28 @@ button:focus {
   background: rgba(219, 26, 32, 0.4);
   cursor: not-allowed;
 }
+
+.row {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.row .animal {
+  flex: 0 1 300px;
+}
+
+.animal_image {
+  width: 100%;
+}
+
+h2 {
+  text-align: center;
+}
+
+section {
+  padding: 2rem 1rem;
+  margin-top: 2rem;
+  border-top: 1px solid gray;
+}

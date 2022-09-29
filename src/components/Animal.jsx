@@ -4,11 +4,12 @@ import Species from './Species';
 import Sex from './Sex';
 import Race from './Race';
 import Age from './Age';
+import Tags from './Tags';
 
 const Animal = (props) => {
   //https://vorstadtcowboy.github.io/images/<name des in Kleinbuchstaben>.webp
   //console.log(props);
-  const { name, species, sex, race, birthday } = props.tier;
+  const { name, species, sex, race, birthday, tags } = props.tier;
 
   return (
     <div className="animal">
@@ -27,6 +28,8 @@ const Animal = (props) => {
         <Race race={race} />
         {/** Age */}
         <Age birthday={birthday} />
+
+        <Tags tags={tags} />
       </div>
     </div>
   );
