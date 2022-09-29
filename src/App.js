@@ -1,8 +1,9 @@
 import Title from './components/Title';
 import Animal from './components/Animal';
-import animalData from './animalData';
+//import animalData from './animalData';
 //Import des React Hooks useState
 import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const App = () => {
   //console.log(animalData[0]);
@@ -11,11 +12,20 @@ const App = () => {
   const [counter, setCounter] = useState(0);
   const [disabledNext, setDisabledNext] = useState(false);
   const [disabledBack, setDisabledBack] = useState(true);
+  //const [pending, setPending] = useState(true);
+  const [animalData, setAnimalData] = useState(null);
 
-  //UseEffect benutzen (bei Side Effects wie title ändern und fetchen)
+  //UseEffect benutzen (bei Side Effects wie title ändern und Daten fetchen)
   useEffect(() => {
     //title ändern
-    document.title = `Hilf ${animalData[counter].species} ${animalData[counter].name}`; //Hilf <tierart> <tiername>
+    //document.title = `Hilf ${animalData[counter].species} ${animalData[counter].name}`; //Hilf <tierart> <tiername>
+
+    /**
+     * Holen uns die Daten von unserer REST Api
+     */
+    axios
+      .get('http://localhost:3004/animals')
+      .then((response) => setAnimalData(response.data));
   });
 
   //EventHandler-function
@@ -38,12 +48,12 @@ const App = () => {
     }
   };
 
-  const alleTiere = animalData.map((tier) => <Animal tier={tier} />);
+  //const alleTiere = animalData.map((tier, i) => <Animal key={i} tier={tier} />);
 
   //Alle Katzen
-  const alleKatzen = animalData
+  /*const alleKatzen = animalData
     .filter((tier) => tier.species === 'Katze')
-    .map((katze) => <Animal tier={katze} />);
+    .map((katze, i) => <Animal key={i} tier={katze} />);*/
 
   return (
     <div>
@@ -52,8 +62,8 @@ const App = () => {
         <Title content="Hunde & Katzen" />
         {/** Conditional Rendering */}
 
-        {/**Animal */}
-        <Animal tier={animalData[counter]} />
+        {/**Animal Conditional Rendering*/}
+        {animalData && <Animal tier={animalData[counter]} />}
         {/** Animal Komponente Endet hier */}
         <div className="controls">
           <button id="pre" onClick={handleBack} disabled={disabledBack}>
@@ -65,15 +75,15 @@ const App = () => {
         </div>
       </div>
       {/** Hier eine Sektion mit allen Tieren */}
-      <section>
+      {/*<section>
         <h2>Alle Tiere</h2>
-        <div className="row">{alleTiere}</div>
+        <div className="row">{animalData && alleTiere}</div>
       </section>
 
       <section>
         <h2>Alle Katzen</h2>
-        <div className="row">{alleKatzen}</div>
-      </section>
+        <div className="row">{animalData && alleKatzen}</div>
+  </section>*/}
     </div>
   );
 };
