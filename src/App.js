@@ -26,7 +26,7 @@ const App = () => {
     axios
       .get('http://localhost:3004/animals')
       .then((response) => setAnimalData(response.data));
-  });
+  }, []);
 
   //EventHandler-function
   function handleNext() {
