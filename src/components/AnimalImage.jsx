@@ -1,7 +1,7 @@
-const AnimalImage = ({ name }) => {
+const AnimalImage = ({ imgUrl, name }) => {
   //String Literal
   //const ImageUrl = `https://vorstadtcowboy.github.io/images/${name.toLowerCase()}.webp`;
-  const src = 'https://vorstadtcowboy.github.io/images/' + name.toLowerCase() + '.webp';
+  const src = 'https://bta.spomu.de' + imgUrl;
 
   return (
     <div className="animal_image">

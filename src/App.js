@@ -23,9 +23,9 @@ const App = () => {
     /**
      * Holen uns die Daten von unserer REST Api
      */
-    axios
-      .get('http://localhost:3004/animals')
-      .then((response) => setAnimalData(response.data));
+    axios.get('https://bta.spomu.de/api/collections/get/animals').then((response) => {
+      setAnimalData(response.data.entries);
+    });
   }, []);
 
   //EventHandler-function

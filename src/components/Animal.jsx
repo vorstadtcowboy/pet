@@ -9,12 +9,12 @@ import Tags from './Tags';
 const Animal = (props) => {
   //https://vorstadtcowboy.github.io/images/<name des in Kleinbuchstaben>.webp
   //console.log(props);
-  const { name, species, sex, race, birthday, tags } = props.tier;
+  const { name, species, sex, race, birthday, tags, imageUrl } = props.tier;
 
   return (
     <div className="animal">
       {/**AnimalImage */}
-      <AnimalImage name={name} />
+      <AnimalImage imgUrl={imageUrl.path} name={name} />
 
       {/** AnimalTitle */}
       <AnimalTitle name={name} />
